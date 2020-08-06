@@ -9,148 +9,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="assets/styles/styles.css">
+    <script src="assets/scripts/index.js"></script>
     <title>World Clock</title>
   </head>
   <body>  
-       <section class="sections add-time-zone">
-            <div class="container">
-                <h2 class="text-uppercase font-weight-bold">Add Time Zone</h2>
-                <div class="line"></div>
+    <div class="background"></div>
+      <header class="main-header">
+        <h1>WORLD CLOCK WEB APP</h1>
+      </header>
+       <section id="search">
+           <form action="">
+               <label for="search">
+                   <input type="text" placeholder="Search countries">
+               </label>
+           </form>
+            
 
-                <form class="column form-inline mx-auto form-margin">
-                    <div class="form-group ">
-                    <h5>anywhere in the world</h5>
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" class="form-control" id="newTimeZone" placeholder="enter a city">
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2">Add <i class="fas fa-plus-circle"></i></button>
-                </form>
-                
-            </div>
+
         </section>
 
 
-        <section class="sections my-time-zone">
-            <div class="container">
-                <h2 class="text-uppercase font-weight-bold">My Time Zones</h2>
-                <div class="line"></div>
-
-                <!-- Added City Section -->
-
-                <div class="city-section">
-                    <h4 class="text-uppercase font-weight-bold">Lagos</h4>
-                    <div class="date-time">
-                        <div class="date">
-                            05.07.20 /
-                        </div>
-                        <div class="time">
-                            12:21:55
-                        </div>
-                        <div class="location">
-                            Nigeria/Lagos
-                        </div>
-                    </div>
-
-                    <i class="delete-time far fa-times-circle"></i>
+        <section id="added-time-zone">
+            <h1 class="added-time-zone-heading">ADDED TIMEZONES</h1>
+          
+            <div class="time-data">
+                <div class="am-pm-icon">
+                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="moon" class="svg-inline--fa fa-moon fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M279.135 512c78.756 0 150.982-35.804 198.844-94.775 28.27-34.831-2.558-85.722-46.249-77.401-82.348 15.683-158.272-47.268-158.272-130.792 0-48.424 26.06-92.292 67.434-115.836 38.745-22.05 28.999-80.788-15.022-88.919A257.936 257.936 0 0 0 279.135 0c-141.36 0-256 114.575-256 256 0 141.36 114.576 256 256 256zm0-464c12.985 0 25.689 1.201 38.016 3.478-54.76 31.163-91.693 90.042-91.693 157.554 0 113.848 103.641 199.2 215.252 177.944C402.574 433.964 344.366 464 279.135 464c-114.875 0-208-93.125-208-208s93.125-208 208-208z"></path></svg>
                 </div>
-
-                <div class="city-section">
-                    <h4 class="text-uppercase font-weight-bold">London</h4>
-                    <div class="date-time">
-                        <div class="date">
-                            05.07.20 /
-                        </div>
-                        <div class="time">
-                            11:21:55
-                        </div>
-                        <div class="location">
-                            UK/London
-                        </div>
-                    </div>
-
-                    <i class="delete-time far fa-times-circle"></i>
+                <div class="time-date">
+                    <span>
+                        <p class="time">10:00</p>
+                        <span class="am-pm-date">
+                            <p class="am-pm">am</p>
+                            <p class="date">Fri, Jan 13</p>
+                        </span>
+                    </span>
+                    <p class="country">United States</p>
+                    <p class="timezone">PST</p>
                 </div>
-                
-                
+                <button class="delete-btn">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                </button>
             </div>
+
+            <div class="time-data">
+                <div class="am-pm-icon">
+                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="moon" class="svg-inline--fa fa-moon fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M279.135 512c78.756 0 150.982-35.804 198.844-94.775 28.27-34.831-2.558-85.722-46.249-77.401-82.348 15.683-158.272-47.268-158.272-130.792 0-48.424 26.06-92.292 67.434-115.836 38.745-22.05 28.999-80.788-15.022-88.919A257.936 257.936 0 0 0 279.135 0c-141.36 0-256 114.575-256 256 0 141.36 114.576 256 256 256zm0-464c12.985 0 25.689 1.201 38.016 3.478-54.76 31.163-91.693 90.042-91.693 157.554 0 113.848 103.641 199.2 215.252 177.944C402.574 433.964 344.366 464 279.135 464c-114.875 0-208-93.125-208-208s93.125-208 208-208z"></path></svg>
+                </div>
+                <div class="time-date">
+                    <span>
+                        <p class="time">10:00</p>
+                        <span class="am-pm-date">
+                            <p class="am-pm">am</p>
+                            <p class="date">Fri, Jan 13</p>
+                        </span>
+                    </span>
+                    <p class="country">United States</p>
+                    <p class="timezone">PST</p>
+                </div>
+                <button class="delete-btn">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                </button>
+            </div>
+
+            <div class="time-data">
+                <div class="am-pm-icon">
+                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="moon" class="svg-inline--fa fa-moon fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M279.135 512c78.756 0 150.982-35.804 198.844-94.775 28.27-34.831-2.558-85.722-46.249-77.401-82.348 15.683-158.272-47.268-158.272-130.792 0-48.424 26.06-92.292 67.434-115.836 38.745-22.05 28.999-80.788-15.022-88.919A257.936 257.936 0 0 0 279.135 0c-141.36 0-256 114.575-256 256 0 141.36 114.576 256 256 256zm0-464c12.985 0 25.689 1.201 38.016 3.478-54.76 31.163-91.693 90.042-91.693 157.554 0 113.848 103.641 199.2 215.252 177.944C402.574 433.964 344.366 464 279.135 464c-114.875 0-208-93.125-208-208s93.125-208 208-208z"></path></svg>
+                </div>
+                <div class="time-date">
+                    <span>
+                        <p class="time">10:00</p>
+                        <span class="am-pm-date">
+                            <p class="am-pm">am</p>
+                            <p class="date">Fri, Jan 13</p>
+                        </span>
+                    </span>
+                    <p class="country">United States</p>
+                    <p class="timezone">PST</p>
+                </div>
+                <button class="delete-btn">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                </button>
+            </div>
+
+            <div class="time-data">
+                <div class="am-pm-icon">
+                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="moon" class="svg-inline--fa fa-moon fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M279.135 512c78.756 0 150.982-35.804 198.844-94.775 28.27-34.831-2.558-85.722-46.249-77.401-82.348 15.683-158.272-47.268-158.272-130.792 0-48.424 26.06-92.292 67.434-115.836 38.745-22.05 28.999-80.788-15.022-88.919A257.936 257.936 0 0 0 279.135 0c-141.36 0-256 114.575-256 256 0 141.36 114.576 256 256 256zm0-464c12.985 0 25.689 1.201 38.016 3.478-54.76 31.163-91.693 90.042-91.693 157.554 0 113.848 103.641 199.2 215.252 177.944C402.574 433.964 344.366 464 279.135 464c-114.875 0-208-93.125-208-208s93.125-208 208-208z"></path></svg>
+                </div>
+                <div class="time-date">
+                    <span>
+                        <p class="time">10:00</p>
+                        <span class="am-pm-date">
+                            <p class="am-pm">am</p>
+                            <p class="date">Fri, Jan 13</p>
+                        </span>
+                    </span>
+                    <p class="country">United States</p>
+                    <p class="timezone">PST</p>
+                </div>
+                <button class="delete-btn">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                </button>
+            </div>
+
+            <div class="time-data">
+                <div class="am-pm-icon">
+                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="moon" class="svg-inline--fa fa-moon fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M279.135 512c78.756 0 150.982-35.804 198.844-94.775 28.27-34.831-2.558-85.722-46.249-77.401-82.348 15.683-158.272-47.268-158.272-130.792 0-48.424 26.06-92.292 67.434-115.836 38.745-22.05 28.999-80.788-15.022-88.919A257.936 257.936 0 0 0 279.135 0c-141.36 0-256 114.575-256 256 0 141.36 114.576 256 256 256zm0-464c12.985 0 25.689 1.201 38.016 3.478-54.76 31.163-91.693 90.042-91.693 157.554 0 113.848 103.641 199.2 215.252 177.944C402.574 433.964 344.366 464 279.135 464c-114.875 0-208-93.125-208-208s93.125-208 208-208z"></path></svg>
+                </div>
+                <div class="time-date">
+                    <span>
+                        <p class="time">10:00</p>
+                        <span class="am-pm-date">
+                            <p class="am-pm">am</p>
+                            <p class="date">Fri, Jan 13</p>
+                        </span>
+                    </span>
+                    <p class="country">United States</p>
+                    <p class="timezone">PST</p>
+                </div>
+                <button class="delete-btn">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                </button>
+            </div>
+
+
         </section>
 
-    <!-- Optional JavaScript -->
 
-    <script src="assets/scripts/index.js"></script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
 </html>
-
-<!-- <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/styles.css">
-    <script src="https://kit.fontawesome.com/74a7e0b8bb.js" crossorigin="anonymous"></script>
-    <title>World Clock</title>
-</head>
-
-<body>
-    <header>
-        <p>Good %Morning%</p>
-        <!-- this would be dynamic -->
-    </header>
-    <section id="main-app">
-        <section id="add-timezones">
-
-        </section>
-        <section id="my-timezones">
-            <section id="my-timezones">
-                <header>
-                    <h1>MY TIMEZONES</h1>
-                </header>
-
-                <div class="container">
-                    <div id="Nigeria">
-                        <i class="fa fa-cloud-sun">Abuja <time>11:30<sup>am</sup></time></i>
-                        <p>NIGERIA WAT</p>
-                    </div>
-
-                    <div id="New-Delhi">
-                        <i class="fas fa-moon">New Delhi <time>11:30<sup>pm</sup></time></i>
-                        <p>INDIA IST</p>
-                    </div>
-
-                    <div id="San-Francisco">
-                        <i class="far fa-sun">San Francisco <time>10:00<sup>am</sup></time></i>
-                        <p>USA PST</p>
-                    </div>
-
-                    <div id="New-York">
-                        <i class="fas fa-cloud-sun">New York <time>1:36<sup>pm</sup></time></i>
-                        <p>USA EST</p>
-                    </div>
-
-                    <div id="London">
-                        <i class="fas fa-sun">London <time>6:00<sup>pm</sup></time></i><br>
-                        <p>UK BST</p>
-                    </div>
-
-                </div>
-
-                <div class="footer">
-                    &copy wejapa groupF 2020
-                </div>
-            </section>
-
-
-        </section>
-</body>
-
-
-</html>
-</html> -->
-
