@@ -147,6 +147,7 @@ div.time-data {
 
 .am-pm-icon svg {
     width: 70%;
+    display: none;
 } 
 
 .time-date {
