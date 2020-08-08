@@ -23,6 +23,12 @@ const domObjects = {
   addedTimeZone: document.getElementById("added-time-zone"),
 };
 
+Number.prototype.pad = function(size) { //pad minute and hour output with leading zero's
+  var s = String(this);
+  while (s.length < size) {s = '0' + s;}
+  return s;
+}
+
 class RenderAddedItems {
   renderAddedTimezone(timeData, countryCode) {
     // Render HTML Boilerplate in the DOM
@@ -32,19 +38,23 @@ class RenderAddedItems {
     const hour = parseInt(timeList[0]);
     const minute = parseInt(timeList[1]);
 
-    this.hour.textContent = hour;
-    this.min.textContent = minute;
+    this.min.textContent = minute.pad(2);
+    
+    if (hour < 12) {
+      this.hour.textContent = hour.pad(2);
+      this.amPm.textContent = "am";
+      this.amIcon.classList.add('display-icon');
+    } else {
+      hour = 24 - hour
+      this.hour.textContent = hour.pad(2)
+      this.amPm.textContent = "pm";
+      this.pmIcon.classList.add('display-icon');
+    }
+    
     const updateTime = new UpdateTime(minute, hour, this.min, this.hour);
     updateTime.updateMin();
     updateTime.updateHour();
 
-    if (hour < 12) {
-      this.amPm.textContent = "am";
-      this.amIcon.style.display = "block";
-    } else {
-      this.amPm.textContent = "pm";
-      this.pmIcon.style.display = "block";
-    }
     this.date.textContent = timeData.date;
     this.country.textContent = timeData.country;
     this.timeZone.textContent = timeData.timezone;
@@ -88,7 +98,7 @@ class RenderAddedItems {
   }
 }
 
-class UpdateTime {
+class UpdateTime { // Updates hour and min data added on regula intervals
   constructor(min, hour, minDOM, hourDOM) {
     (this.min = min),
       (this.hour = hour),
@@ -96,26 +106,35 @@ class UpdateTime {
       (this.hourDOM = hourDOM);
   }
 
+  updateHourHandler() {
+    this.hour++;
+      if (hour > 12) {
+        this.hour = 1
+      }
+      this.hourDOM.textContent = this.hour.pad(2);
+  }
+
+  updateMinHandler() {
+    this.min++;
+      console.log(this.min)
+      console.log(typeof(this.min))
+      if (this.min > 60) {
+        this.min = 1;
+
+      }
+      console.log(this.min);
+      this.minDOM.textContent = this.min.pad(2);
+  }
+
   updateHour() {
-    const hourDOM = this.hourDOM;
-    let hour = this.hour;
-    setInterval(function () {
-      hour++;
-      hourDOM.textContent = hour;
-    }, 60 * 60 * 1000);
+    // const hourDOM = this.hourDOM;
+    // let hour = this.hour;
+    setInterval(this.updateHourHandler.bind(this), 60 * 60 * 1000);
   }
   updateMin() {
-    // console.log(this.minDOM.textContent)
-    // console.log(this.min)
-    // console.log(typeof(this.min))
-    const minDOM = this.minDOM;
-    let min = this.min;
-    setInterval(function () {
-      // console.log(this.min)
-      min++;
-      console.log(min);
-      minDOM.textContent = min;
-    }, 60 * 1000);
+    // const minDOM = this.minDOM;
+    // let min = this.min;
+    setInterval(this.updateMinHandler.bind(this), 60 * 1000);
   }
 }
 
