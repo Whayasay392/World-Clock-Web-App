@@ -33,24 +33,35 @@ class RenderAddedItems {
   renderAddedTimezone(timeData, countryCode) {
     // Render HTML Boilerplate in the DOM
     // this.time.textContent = timeData.time;
+    // console.log(timeData)
+    // console.log(countryCode)
 
     const timeList = timeData.time.split(":");
-    const hour = parseInt(timeList[0]);
+    let hour = parseInt(timeList[0]);
     const minute = parseInt(timeList[1]);
-
+// console.log(minute)
     this.min.textContent = minute.pad(2);
-    
+
+    // console.log(this.min)
+    console.log(hour)
     if (hour < 12) {
       this.hour.textContent = hour.pad(2);
       this.amPm.textContent = "am";
       this.amIcon.classList.add('display-icon');
-    } else {
-      hour = 24 - hour
+      console.log('here')
+    } else if (hour >= 12) {
+      hour = hour - 12
+      console.log('here')
       this.hour.textContent = hour.pad(2)
       this.amPm.textContent = "pm";
       this.pmIcon.classList.add('display-icon');
     }
+
+    console.log('passed')
     
+    // console.log(this.hour)
+    // console.log(this.pmIcon)
+    // console.log(this.amIcon)
     const updateTime = new UpdateTime(minute, hour, this.min, this.hour);
     updateTime.updateMin();
     updateTime.updateHour();
@@ -70,23 +81,28 @@ class RenderAddedItems {
 
   renderList(timeData, countryCode) {
     this.HTMLBoilerPlate = domObjects["HTMLBoilerPlate"].cloneNode(true);
+    // console.log(this.HTMLBoilerPlate)
 
-    (this.pmIcon = this.HTMLBoilerPlate.querySelector(".pm")),
-      (this.amIcon = this.HTMLBoilerPlate.querySelector(".am")),
-      (this.hour = this.HTMLBoilerPlate.querySelector(".time .hour")),
-      (this.min = this.HTMLBoilerPlate.querySelector(".time .min")),
-      (this.amPm = this.HTMLBoilerPlate.querySelector(".am-pm")),
-      (this.date = this.HTMLBoilerPlate.querySelector(".date")),
-      (this.country = this.HTMLBoilerPlate.querySelector(".country")),
-      (this.deleteBtn = this.HTMLBoilerPlate.querySelector(".delete-btn")),
-      (this.timeZone = this.HTMLBoilerPlate.querySelector(".timezone"));
+    // console.log('0')
+    this.pmIcon = this.HTMLBoilerPlate.querySelector(".pm")
+    // console.log(this.pmIcon)
+    this.amIcon = this.HTMLBoilerPlate.querySelector(".am")
+      // console.log('2')
+      this.hour = this.HTMLBoilerPlate.querySelector(".time .hour")
+      // console.log('3')
+      this.min = this.HTMLBoilerPlate.querySelector(".time .min")
+      this.amPm = this.HTMLBoilerPlate.querySelector(".am-pm")
+      this.date = this.HTMLBoilerPlate.querySelector(".date")
+      this.country = this.HTMLBoilerPlate.querySelector(".country")
+      this.deleteBtn = this.HTMLBoilerPlate.querySelector(".delete-btn")
+      this.timeZone = this.HTMLBoilerPlate.querySelector(".timezone")
 
     domObjects.addedTimeZone.innerHTML = "";
 
     for (let timeItem in addedTimeList) {
       domObjects.addedTimeZone.append(addedTimeList[timeItem]);
     }
-
+    // console.log(domObjects.addedTimeList)
     this.renderAddedTimezone(timeData, countryCode);
 
     this.deleteBtn.addEventListener("click", function () {
@@ -242,6 +258,7 @@ const generateTimezone = (countryCode) => {
       const timezone = res.timezone;
       const location = timezone[0];
       const area = timezone[1];
+      console.log('gen')
       generateTime(res.country, location, area, countryCode);
     })
     .catch((err) => {
@@ -267,8 +284,12 @@ const generateTime = (country, location, area, countryCode) => {
       const timezone = data.abbreviation;
       const date = data.datetime.slice(0, 10);
       const time = data.datetime.slice(11, 16);
-
+      // console.log(timezone)
+      // console.log(date)
+      // console.log(time)
+      console.log(data)
       const timeData = new TimeData(country, time, "am", date, timezone);
+      // console.log(timeData)
       const rederAddedItem = new RenderAddedItems();
       rederAddedItem.renderList(timeData, countryCode);
     })
