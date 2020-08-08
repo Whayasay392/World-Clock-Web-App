@@ -1,5 +1,6 @@
 const addedTimeList = {};
 let countries = {};
+let availableTags = [];
 
 let test;
 
@@ -33,21 +34,16 @@ class RenderAddedItems {
 
     this.hour.textContent = hour;
     this.min.textContent = minute;
-    const updateTime = new UpdateTime(
-      minute,
-      hour,
-      this.min,
-      this.hour
-    );
+    const updateTime = new UpdateTime(minute, hour, this.min, this.hour);
     updateTime.updateMin();
     updateTime.updateHour();
 
     if (hour < 12) {
       this.amPm.textContent = "am";
-      this.amIcon.style.display = 'block';
+      this.amIcon.style.display = "block";
     } else {
       this.amPm.textContent = "pm";
-      this.pmIcon.style.display = 'block'
+      this.pmIcon.style.display = "block";
     }
     this.date.textContent = timeData.date;
     this.country.textContent = timeData.country;
@@ -66,8 +62,8 @@ class RenderAddedItems {
     this.HTMLBoilerPlate = domObjects["HTMLBoilerPlate"].cloneNode(true);
 
     (this.pmIcon = this.HTMLBoilerPlate.querySelector(".pm")),
-    (this.amIcon = this.HTMLBoilerPlate.querySelector(".am")),
-    (this.hour = this.HTMLBoilerPlate.querySelector(".time .hour")),
+      (this.amIcon = this.HTMLBoilerPlate.querySelector(".am")),
+      (this.hour = this.HTMLBoilerPlate.querySelector(".time .hour")),
       (this.min = this.HTMLBoilerPlate.querySelector(".time .min")),
       (this.amPm = this.HTMLBoilerPlate.querySelector(".am-pm")),
       (this.date = this.HTMLBoilerPlate.querySelector(".date")),
@@ -94,28 +90,31 @@ class RenderAddedItems {
 
 class UpdateTime {
   constructor(min, hour, minDOM, hourDOM) {
-    (this.min = min), (this.hour = hour), (this.minDOM = minDOM), (this.hourDOM = hourDOM);
+    (this.min = min),
+      (this.hour = hour),
+      (this.minDOM = minDOM),
+      (this.hourDOM = hourDOM);
   }
 
   updateHour() {
-    const hourDOM = this.hourDOM
-    let hour = this.hour
+    const hourDOM = this.hourDOM;
+    let hour = this.hour;
     setInterval(function () {
       hour++;
-      hourDOM.textContent = hour
+      hourDOM.textContent = hour;
     }, 60 * 60 * 1000);
   }
   updateMin() {
     // console.log(this.minDOM.textContent)
     // console.log(this.min)
     // console.log(typeof(this.min))
-    const minDOM = this.minDOM
-    let min = this.min
+    const minDOM = this.minDOM;
+    let min = this.min;
     setInterval(function () {
       // console.log(this.min)
-      min ++;
-      console.log(min)
-      minDOM.textContent = min
+      min++;
+      console.log(min);
+      minDOM.textContent = min;
     }, 60 * 1000);
   }
 }
@@ -173,7 +172,7 @@ const getCountriesList = () => {
       method: "GET",
       headers: {
         "x-rapidapi-host": "countries-cities.p.rapidapi.com",
-        "x-rapidapi-key": "7e4308a5efmsh1bd3f459f5e77b4p170227jsn49622c75631d",
+        "x-rapidapi-key": "0f48d1e7efmsh27f074765b2d7eap100291jsne90996e210bd",
       },
     }
   )
@@ -187,6 +186,7 @@ const getCountriesList = () => {
         // Converts API response to object format of {country: id}
         const country = generatedData[id];
         countries[country] = id;
+        availableTags.push(country);
       }
 
       console.log(countries);
@@ -205,7 +205,7 @@ const generateTimezone = (countryCode) => {
       method: "GET",
       headers: {
         "x-rapidapi-host": "countries-cities.p.rapidapi.com",
-        "x-rapidapi-key": "7e4308a5efmsh1bd3f459f5e77b4p170227jsn49622c75631d",
+        "x-rapidapi-key": "0f48d1e7efmsh27f074765b2d7eap100291jsne90996e210bd",
       },
     }
   )
@@ -236,7 +236,7 @@ const generateTime = (country, location, area, countryCode) => {
     method: "GET",
     headers: {
       "x-rapidapi-host": "world-time2.p.rapidapi.com",
-      "x-rapidapi-key": "7e4308a5efmsh1bd3f459f5e77b4p170227jsn49622c75631d",
+      "x-rapidapi-key": "0f48d1e7efmsh27f074765b2d7eap100291jsne90996e210bd",
     },
   })
     .then((response) => {
@@ -273,3 +273,10 @@ const validateUserInput = (userInput) => {
 
 EventListener.init();
 getCountriesList();
+
+// Jquery for auto complete feature
+$(function () {
+  $("#tags").autocomplete({
+    source: availableTags,
+  });
+});

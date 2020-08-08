@@ -206,3 +206,28 @@ button.delete-btn svg {
 button.delete-btn:hover {
     border: 2px solid rgb(45, 17, 100);
 } 
+
+
+/* Style auto complete box  */
+/* 
+element.style {
+    width: 45%;
+    max-height: 21rem !important; 
+    overflow-y: scroll;
+} */
+
+.ui-widget.ui-widget-content {
+    border: 1px solid #c5c5c5;
+}
+
+.ui-widget-content {
+    border: 3px solid rgb(45, 17, 100);
+    background: #fff;
+    color: rgb(45, 17, 100);
+    border-radius: 15px;
+}
+
+.ui-widget {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 1rem;
+}
