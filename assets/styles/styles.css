@@ -1,167 +1,298 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap");
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+}
+
+div#boiler-plate {
+  display: none;
 }
 
 .background {
-    background: no-repeat url("../images/background3.jpg");
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -100;
+  background: no-repeat url("../images/background3.jpg");
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -100;
 }
 
-section, header {
-    max-width: 47rem;
-    margin: 0 auto;
-    width: 100%;
+section,
+header {
+  max-width: 47rem;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .main-header {
-    border: 3px solid rgb(45, 17, 100);
-    background-color: rgb(255, 255, 255);
-    padding: 0.5rem 0;
-    /* margin-bottom: 2rem; */
-    color: rgb(45, 17, 100);
-    border-radius: 10px;
+  border: 3px solid rgb(45, 17, 100);
+  background-color: rgb(255, 255, 255);
+  padding: 0.5rem 0;
+  /* margin-bottom: 2rem; */
+  color: rgb(45, 17, 100);
+  border-radius: 10px;
+}
+
+label[for="search"] {
+  width: 45%;
+  display: block;
+  margin: 0 auto;
+  position: relative;
 }
 
 label input {
-    width: 45%;
-    padding: 0.7rem;
-    border-radius: 15px;
-    border: 3px solid rgb(45, 17, 100);
-    font-size: 1rem;
-    color: rgb(45, 17, 100);
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 15px;
+  border: 3px solid rgb(45, 17, 100);
+  font-size: 1rem;
+  color: rgb(45, 17, 100);
 }
 
 label input:focus {
-    outline: none;
+  outline: none;
 }
 
+.search-icon {
+  background-color: transparent;
+  color: rgb(45, 17, 100);
+  width: 1.5rem;
+  height: 42%;
+  position: absolute;
+  right: 0.6rem;
+  top: 0.75rem;
+  padding: 0;
+  border: none;
+}
+
+.search-icon svg {
+  /* width: 100%; */
+  height: 100%;
+}
+
+section#added-item-wrap {
+  height: 65%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  grid-template-areas: "heading body";
+}
 section#added-time-zone {
-    /* max-height: 60%; */
-    border-radius: 10px;
-    height: 65%;
-    overflow-y: auto;
-    position: relative;
-    
-    border: 3px solid rgb(45, 17, 100);
-    color: rgb(45, 17, 100);
-    /* display: flex; */
-    
+  /* max-height: 60%; */
+  border-radius: 10px;
+  overflow-y: auto;
+  position: relative;
+  height: 100%;
+
+  border: 3px solid rgb(45, 17, 100);
+  color: rgb(45, 17, 100);
+  /* padding-left: 3.4rem; */
+  grid-area: body;
+  /* display: flex; */
 }
 
 .added-time-zone-heading {
     transform: rotate(-90deg);
-    width: 65vh;
+    width: 50rem;
     background-color: rgb(45, 17, 100);
     color: white;
-    height: 3.5rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    grid-area: heading;
+    transform-origin: top left;
+    /* left: 3.5rem; */
     position: absolute;
-    top: 149px;
-    left: -175px;
+    bottom: -269px;
 }
 
 div.time-data {
-    position: relative;
-    margin: 2rem auto;
-    height: 12rem;
-    width: 80%;
-    background-color: rgba(255, 255, 255, 0.863);
-    color: rgb(45, 17, 100);
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: 6rem 23rem;
-    grid-template-areas: 'am-pm-icon time-date';
-    border: 3px solid rgb(45, 17, 100);
-    justify-content: center;
+  position: relative;
+  margin: 2rem auto;
+  height: 12rem;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.863);
+  color: rgb(45, 17, 100);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  grid-template-areas: "am-pm-icon time-date";
+  border: 3px solid rgb(45, 17, 100);
+  justify-content: left;
 }
 
 .am-pm-icon {
-    grid-area: am-pm-icon;
-    align-self: center;
+  grid-area: am-pm-icon;
+  /* align-self: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .am-pm-icon svg {
-    width: 70%;
-} 
+  width: 70%;
+  display: none;
+}
+
+.display-icon {
+  display: flex !important;
+  justify-content: center;
+  /* display: block; */
+}
 
 .time-date {
-    grid-area: time-date;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-self: center;
-    text-align: left;
+  grid-area: time-date;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: center;
+  text-align: left;
 }
 
 .time-date > span {
-    display: grid;
-    grid-template-columns: 10.5rem 7rem;
-    text-align: left;
-    height: 4.5rem;
+  display: grid;
+  grid-template-columns: 11rem auto;
+  align-items: center;
+  text-align: left;
+  height: auto;
 }
 
 .time {
-    font-size: 4rem;
-    margin: 0;
+  font-size: 4rem;
+  margin: 0;
 }
 
 .am-pm-date {
-    
-    align-self: center;
+  align-self: center;
+  /* padding-left: 6px; */
 }
 
 .am-pm-date p {
-    margin: 0.7rem 0;
+  margin: 0.7rem 0;
 }
 
-.country, .timezone {
-    margin: 0;
+.country,
+.timezone {
+  margin: 0;
 }
 
 button.delete-btn {
-    color: rgb(45, 17, 100);
-    height: 2.5rem;
-    width: 2.5rem;
-    background: none;
-    border: none;
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  color: rgb(45, 17, 100);
+  height: 2.5rem;
+  width: 2.5rem;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button.delete-btn svg {
-    width: 1rem;
+  width: 1rem;
 }
 
 button.delete-btn:hover {
-    border: 2px solid rgb(45, 17, 100);
-} 
+  border: 2px solid rgb(45, 17, 100);
+}
+
+/* Media queries */
+
+@media (max-width: 660px) {
+  .am-pm-icon svg {
+    width: 55%;
+  }
+
+  .time-date > span {
+    /* display: grid; */
+    grid-template-columns: 8rem auto;
+
+    /* text-align: left; */
+    /* height: 4.rem; */
+  }
+
+  .am-pm-date p {
+    /* margin: 0.7rem 0; */
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+  }
+
+  .time {
+    font-size: 2.8rem;
+    /* margin: 0; */
+  }
+}
+
+@media (max-width: 460px) {
+  .time {
+    font-size: 1.8rem;
+  }
+
+  .am-pm-date p {
+    font-size: 0.61rem;
+  }
+
+  .time-date > span {
+    grid-template-columns: 5.2rem auto;
+  }
+
+  label[for="search"] {
+    width: 60%;
+  }
+
+  .main-header h1 {
+    font-size: 1rem;
+  }
+
+  div.time-data {
+      grid-template-columns: 4rem auto;
+  }
+}
+
+/* Style auto complete box  */
+/* 
+element.style {
+    width: 45%;
+    max-height: 21rem !important; 
+    overflow-y: scroll;
+} */
+
+.ui-widget.ui-widget-content {
+  border: 1px solid #c5c5c5;
+}
+
+.ui-widget-content {
+  border: 3px solid rgb(45, 17, 100);
+  background: #fff;
+  color: rgb(45, 17, 100);
+  border-radius: 15px;
+}
+
+.ui-widget {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+}
