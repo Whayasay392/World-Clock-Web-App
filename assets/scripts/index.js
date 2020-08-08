@@ -1,6 +1,8 @@
 const addedTimeList = {};
 let countries = {};
-let availableTags = [];
+
+
+const availableTimezones = [];
 
 let test;
 
@@ -23,45 +25,43 @@ const domObjects = {
   addedTimeZone: document.getElementById("added-time-zone"),
 };
 
-Number.prototype.pad = function(size) { //pad minute and hour output with leading zero's
+Number.prototype.pad = function (size) {
+  //pad minute and hour output with leading zero's
   var s = String(this);
-  while (s.length < size) {s = '0' + s;}
+  while (s.length < size) {
+    s = "0" + s;
+  }
   return s;
-}
+};
 
 class RenderAddedItems {
   renderAddedTimezone(timeData, countryCode) {
     // Render HTML Boilerplate in the DOM
     // this.time.textContent = timeData.time;
-    // console.log(timeData)
-    // console.log(countryCode)
 
     const timeList = timeData.time.split(":");
     let hour = parseInt(timeList[0]);
     const minute = parseInt(timeList[1]);
-// console.log(minute)
+    // console.log(minute)
     this.min.textContent = minute.pad(2);
 
     // console.log(this.min)
-    console.log(hour)
+    console.log(hour);
     if (hour < 12) {
       this.hour.textContent = hour.pad(2);
       this.amPm.textContent = "am";
-      this.amIcon.classList.add('display-icon');
-      console.log('here')
+      this.amIcon.classList.add("display-icon");
+      console.log("here");
     } else if (hour >= 12) {
-      hour = hour - 12
-      console.log('here')
-      this.hour.textContent = hour.pad(2)
+      hour = hour - 12;
+      console.log("here");
+      this.hour.textContent = hour.pad(2);
       this.amPm.textContent = "pm";
-      this.pmIcon.classList.add('display-icon');
+      this.pmIcon.classList.add("display-icon");
     }
 
-    console.log('passed')
     
-    // console.log(this.hour)
-    // console.log(this.pmIcon)
-    // console.log(this.amIcon)
+
     const updateTime = new UpdateTime(minute, hour, this.min, this.hour);
     updateTime.updateMin();
     updateTime.updateHour();
@@ -81,21 +81,16 @@ class RenderAddedItems {
 
   renderList(timeData, countryCode) {
     this.HTMLBoilerPlate = domObjects["HTMLBoilerPlate"].cloneNode(true);
-    // console.log(this.HTMLBoilerPlate)
 
-    // console.log('0')
-    this.pmIcon = this.HTMLBoilerPlate.querySelector(".pm")
-    // console.log(this.pmIcon)
-    this.amIcon = this.HTMLBoilerPlate.querySelector(".am")
-      // console.log('2')
-      this.hour = this.HTMLBoilerPlate.querySelector(".time .hour")
-      // console.log('3')
-      this.min = this.HTMLBoilerPlate.querySelector(".time .min")
-      this.amPm = this.HTMLBoilerPlate.querySelector(".am-pm")
-      this.date = this.HTMLBoilerPlate.querySelector(".date")
-      this.country = this.HTMLBoilerPlate.querySelector(".country")
-      this.deleteBtn = this.HTMLBoilerPlate.querySelector(".delete-btn")
-      this.timeZone = this.HTMLBoilerPlate.querySelector(".timezone")
+    this.pmIcon = this.HTMLBoilerPlate.querySelector(".pm");
+    this.amIcon = this.HTMLBoilerPlate.querySelector(".am");
+    this.hour = this.HTMLBoilerPlate.querySelector(".time .hour");
+    this.min = this.HTMLBoilerPlate.querySelector(".time .min");
+    this.amPm = this.HTMLBoilerPlate.querySelector(".am-pm");
+    this.date = this.HTMLBoilerPlate.querySelector(".date");
+    this.country = this.HTMLBoilerPlate.querySelector(".country");
+    this.deleteBtn = this.HTMLBoilerPlate.querySelector(".delete-btn");
+    this.timeZone = this.HTMLBoilerPlate.querySelector(".timezone");
 
     domObjects.addedTimeZone.innerHTML = "";
 
@@ -114,7 +109,8 @@ class RenderAddedItems {
   }
 }
 
-class UpdateTime { // Updates hour and min data added on regula intervals
+class UpdateTime {
+  // Updates hour and min data added on regula intervals
   constructor(min, hour, minDOM, hourDOM) {
     (this.min = min),
       (this.hour = hour),
@@ -124,22 +120,21 @@ class UpdateTime { // Updates hour and min data added on regula intervals
 
   updateHourHandler() {
     this.hour++;
-      if (hour > 12) {
-        this.hour = 1
-      }
-      this.hourDOM.textContent = this.hour.pad(2);
+    if (hour > 12) {
+      this.hour = 1;
+    }
+    this.hourDOM.textContent = this.hour.pad(2);
   }
 
   updateMinHandler() {
     this.min++;
-      console.log(this.min)
-      console.log(typeof(this.min))
-      if (this.min > 60) {
-        this.min = 1;
-
-      }
-      console.log(this.min);
-      this.minDOM.textContent = this.min.pad(2);
+    console.log(this.min);
+    console.log(typeof this.min);
+    if (this.min > 60) {
+      this.min = 1;
+    }
+    console.log(this.min);
+    this.minDOM.textContent = this.min.pad(2);
   }
 
   updateHour() {
@@ -199,99 +194,94 @@ class EventListener {
 
 ///////////////////////////// API /////////// :)
 
-const getCountriesList = () => {
+const getTimezones = () => {
   //Generates all countries list to be used to validate user input
   fetch(
-    "https://countries-cities.p.rapidapi.com/location/country/list?format=json",
-    {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "countries-cities.p.rapidapi.com",
-        "x-rapidapi-key": "0f48d1e7efmsh27f074765b2d7eap100291jsne90996e210bd",
-      },
-    }
+    "https://cors-anywhere.herokuapp.com/http://api.timezonedb.com/v2.1/list-time-zone?key=GQ7OZD3IEZN9&format=json"
   )
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      const generatedData = data.countries;
+      const generatedTimezones = data.zones;
+      generatedTimezones.forEach((timezone) => {
+        availableTimezones.push(timezone.zoneName);
+      });
+      console.log(availableTimezones);
+      
 
-      for (const id in generatedData) {
-        // Converts API response to object format of {country: id}
-        const country = generatedData[id];
-        countries[country] = id;
-        availableTags.push(country);
+      $(function () { // Init autocomplete plugin
+        $("input").autocomplete({
+          source: [availableTimezones],
+        });
+      });
+      
+  
+      for (const id in generatedTimezones) {                          ///
+        // Converts API response to object format of {country: id}    ///
+        const country = generatedTimezones[id];                       ///  
+        countries[country] = id;                                      /// 
       }
 
-      console.log(countries);
+      // console.log(countries);                                         ///
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-const generateTimezone = (countryCode) => {
-  // Use country code to generate timezone to be parsed into
-  //generateTime function to generate current time for the country
-  fetch(
-    `https://countries-cities.p.rapidapi.com/location/country/${countryCode}?format=json`,
-    {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "countries-cities.p.rapidapi.com",
-        "x-rapidapi-key": "0f48d1e7efmsh27f074765b2d7eap100291jsne90996e210bd",
-      },
-    }
-  )
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return {
-        country: data.name,
-        timezone: data.timezone.timezone.split("/"),
-      };
-    })
-    .then((res) => {
-      // console.log(countryCode)
-      const timezone = res.timezone;
-      const location = timezone[0];
-      const area = timezone[1];
-      console.log('gen')
-      generateTime(res.country, location, area, countryCode);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+// const generateTimezoneData = (countryCode) => {
+//   // Use country code to generate timezone to be parsed into
+//   //generateTime function to generate current time for the country
+//   fetch(
+//     `https://cors-anywhere.herokuapp.com/https://countries-cities.p.rapidapi.com/location/country/${countryCode}?format=json`,
+//     {
+//       method: "GET",
+//       headers: {
+//         "x-rapidapi-host": "countries-cities.p.rapidapi.com",
+//         "x-rapidapi-key": "0f48d1e7efmsh27f074765b2d7eap100291jsne90996e210bd",
+//       },
+//     }
+//   )
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((data) => {
+//       return {
+//         country: data.name,
+//         timezone: data.timezone.timezone.split("/"),
+//       };
+//     })
+//     .then((res) => {
+//       // console.log(countryCode)
+//       const timezone = res.timezone;
+//       const location = timezone[0];
+//       const area = timezone[1];
+//       console.log("gen");
+//       generateTime(res.country, location, area, countryCode);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
 
-// let timeData; //To be generated inside generateTime function
-const generateTime = (country, location, area, countryCode) => {
-  fetch(`https://world-time2.p.rapidapi.com/timezone/${location}/${area}`, {
-    method: "GET",
-    headers: {
-      "x-rapidapi-host": "world-time2.p.rapidapi.com",
-      "x-rapidapi-key": "0f48d1e7efmsh27f074765b2d7eap100291jsne90996e210bd",
-    },
-  })
+const generateTimezoneData = (timezone) => {
+  fetch(`https://cors-anywhere.herokuapp.com/http://api.timezonedb.com/v2.1/get-time-zone?key=GQ7OZD3IEZN9&format=json&by=zone&zone=${timezone}`)
     .then((response) => {
-      console.log(response);
 
       return response.json();
     })
     .then((data) => {
-      const timezone = data.abbreviation;
-      const date = data.datetime.slice(0, 10);
-      const time = data.datetime.slice(11, 16);
-      // console.log(timezone)
-      // console.log(date)
-      // console.log(time)
       console.log(data)
+      const country = data.countryName;
+
+      const timezone = data.abbreviation;
+      const date = data.formatted.slice(0, 10);
+      const time = data.formatted.slice(11, 16);
+      const zoneName = data.zoneName;
       const timeData = new TimeData(country, time, "am", date, timezone);
-      // console.log(timeData)
       const rederAddedItem = new RenderAddedItems();
-      rederAddedItem.renderList(timeData, countryCode);
+      rederAddedItem.renderList(timeData, zoneName);
     })
     .catch((err) => {
       console.log(err);
@@ -299,24 +289,21 @@ const generateTime = (country, location, area, countryCode) => {
 };
 
 const validateUserInput = (userInput) => {
-  if (userInput in countries) {
+  if (availableTimezones.includes(userInput)) {
+
     let countryCode = countries[userInput];
     if (addedTimeList.hasOwnProperty(countryCode)) {
       alert("Country already added :)");
       return;
     }
-    generateTimezone(countryCode); //parse in country code
+    console.log(userInput)
+    generateTimezoneData(userInput); //parse in country code
   } else {
     alert("Country format wrong!");
   }
 };
 
 EventListener.init();
-getCountriesList();
+getTimezones();
 
-// Jquery for auto complete feature
-$(function () {
-  $("#tags").autocomplete({
-    source: availableTags,
-  });
-});
+// $("#tags").combobox();
