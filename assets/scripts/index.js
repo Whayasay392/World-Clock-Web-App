@@ -189,8 +189,11 @@ class EventListener {
       event.preventDefault();
       const userInput = searchInput.value;
       this.searchIconHandler(userInput);
+      searchInput.value = "";
     });
   }
+
+  
 
   static searchInputHandler(event, EventListener) {
     // calls searchIconHandler when 'Enter' key is pressed
