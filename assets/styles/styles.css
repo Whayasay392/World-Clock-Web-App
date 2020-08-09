@@ -141,6 +141,8 @@ label input:focus {
   top: 0.75rem;
   padding: 0;
   border: none;
+  z-index: 9;
+  cursor: pointer;
 }
 
 .search-icon svg {
