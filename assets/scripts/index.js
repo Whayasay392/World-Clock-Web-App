@@ -1,3 +1,20 @@
+// Typewriter Effect
+// var i = 0;
+// var txt = 'WORLD CLOCK WEB APP'
+// var speed = 50;
+
+// function typeWriter() {
+//   if (i<txt.length) {
+//     document.getElementsByTagName('h1').innerHTML += txt.charAt(i);
+//      i++;
+//      setTimeout(typeWriter, speed);
+
+
+//   }
+// }
+
+
+
 const addedTimeList = {};
 let countries = {};
 

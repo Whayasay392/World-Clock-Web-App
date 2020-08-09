@@ -100,6 +100,23 @@ header {
   color: rgb(45, 17, 100);
   border-radius: 10px;
 }
+.main-header h1 {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid rgb(45, 17, 100) ;
+  width: 21ch;
+  text-align: center;
+  margin: 0 auto;
+  animation: typing 5s steps(21) infinite alternate;
+}
+@keyframes  typing {
+ 0% {
+    width: 0;
+  }
+  /* to {
+    width: 100%;
+  } */
+}
 
 label[for="search"] {
   width: 45%;
@@ -153,6 +170,12 @@ label input:focus {
 .search-icon svg {
   /* width: 100%; */
   height: 100%;
+  transition: transform .2s;
+}
+.search-icon:hover {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 section#added-item-wrap {
