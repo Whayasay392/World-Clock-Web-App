@@ -20,12 +20,62 @@ body {
   padding: 5px;
 }
 
+#loading-cover {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  outline: 5px double rgb(0, 0, 0);
+  outline-offset: -15px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+img {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  width: 20vw;
+}
+
+#cover-spin {
+  width: 100%;
+  width: 5rem;
+  height: 5rem;
+  border-style: dashed;
+  border-color: rgb(0, 0, 0);
+  border-top-color: transparent;
+  border-width: 6px;
+  border-radius: 50%;
+  -webkit-animation: spin .8s linear infinite;
+  animation: spin .8s linear infinite;
+}
+
+#loading-cover p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}
+
+@-webkit-keyframes spin {
+from {-webkit-transform:rotate(0deg);}
+to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+from {transform:rotate(0deg);}
+to {transform:rotate(360deg);}
+}
+
 div#boiler-plate {
   display: none;
 }
 
 .background {
-  background: no-repeat url("../images/background3.jpg");
+  background: no-repeat url("../images/climpek-1920x1080.png");
   height: 100%;
   width: 100%;
   background-size: cover;
@@ -56,6 +106,7 @@ label[for="search"] {
   display: block;
   margin: 0 auto;
   position: relative;
+  background-color: #ffffff;
 }
 
 label input {
@@ -69,6 +120,15 @@ label input {
 
 label input:focus {
   outline: none;
+}
+
+.xdsoft_autocomplete { /* overwrite style in plugin */
+  width: 100% !important; 
+}
+
+.xdsoft_autocomplete_dropdown {
+  max-height: 250px !important;
+  overflow-x: auto !important;
 }
 
 .search-icon {
