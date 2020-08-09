@@ -39,7 +39,10 @@ class RenderAddedItems {
     let hour = parseInt(timeList[0]);
     let minute = parseInt(timeList[1]);
     let sec = parseInt(timeList[2]);
+    console.log(timeList)
+
     // console.log(timeList)
+
     // console.log(this.sec)
     this.min.textContent = minute.pad(2);
 
@@ -195,6 +198,7 @@ class EventListener {
 
   
 
+// >>>>>>> master
   static searchInputHandler(event, EventListener) {
     // calls searchIconHandler when 'Enter' key is pressed
     if (event.key === "Enter") {
@@ -242,6 +246,15 @@ const getTimezones = () => {
     });
 };
 
+const changeDateFormat = (date) => {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
+      'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      const days = ['Sun','Mon', 'Tue', 'Wed','Thur','Fri','Sat'] 
+      const formartedDate = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`
+      return formartedDate
+}
+
+
 const generateTimezoneData = (timezone) => {
   fetch(
     `https://cors-anywhere.herokuapp.com/http://api.timezonedb.com/v2.1/get-time-zone?key=GQ7OZD3IEZN9&format=json&by=zone&zone=${timezone}`
@@ -253,14 +266,28 @@ const generateTimezoneData = (timezone) => {
       console.log(data);
       const country = data.countryName;
 
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
+      'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      const days = ['Sun','Mon', 'Tue', 'Wed','Thur','Fri','Sat']
       const timezone = data.abbreviation;
-      const date = data.formatted.slice(0, 10);
+      const date = new Date(data.formatted.slice(0, 10));
+      const formartedDate = changeDateFormat(date)
+
+
+//       const timezone = data.abbreviation;
+//       const date = data.formatted.slice(0, 10);
+
       let times = data.formatted;
       console.log(times);
       // console.log('h1')
       const time = data.formatted.slice(11, 19);
       const zoneName = data.zoneName;
-      const timeData = new TimeData(country, time, date, timezone);
+// <<<<<<< master
+      
+      const timeData = new TimeData(country, time, formartedDate, timezone);
+// =======
+//       const timeData = new TimeData(country, time, date, timezone);
+// >>>>>>> master
       // console.log('h2')
       const rederAddedItem = new RenderAddedItems();
       rederAddedItem.renderList(timeData, zoneName);
