@@ -238,7 +238,13 @@ const getTimezones = () => {
       console.log(err);
     });
 };
-
+const changeDateFormat = (date) => {
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+      'August', 'September', 'October', 'November', 'December']
+      const days = ['Sun','Mon', 'Tue', 'Wed','Thur','Fri','Sat'] 
+      const formartedDate = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`
+      return formartedDate
+}
 const generateTimezoneData = (timezone) => {
   fetch(
     `https://cors-anywhere.herokuapp.com/http://api.timezonedb.com/v2.1/get-time-zone?key=GQ7OZD3IEZN9&format=json&by=zone&zone=${timezone}`
@@ -254,7 +260,7 @@ const generateTimezoneData = (timezone) => {
       const days = ['Sun','Mon', 'Tue', 'Wed','Thur','Fri','Sat']
       const timezone = data.abbreviation;
       const date = new Date(data.formatted.slice(0, 10));
-      const formartedDate = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`
+      const formartedDate = changeDateFormat(date)
       let times = data.formatted;
       console.log(times);
       // console.log('h1')
